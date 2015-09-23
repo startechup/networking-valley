@@ -21,6 +21,10 @@ You don't have to worry writing codes to implement the SSL/HTTPS feature, it is 
 
 
 ### How we implemented it
+Add Networking-Valley to your dependencies on `build.gradle`:
+
+`compile 'com.startechup.tools:networkingvalley:1.0.3'`
+
 First, we converted the files into [BKS](https://www.bouncycastle.org/specifications.html) format and uploaded it to the project's
 /raw folder. Then in our global Application class, we added the "builder" implementation.
 
