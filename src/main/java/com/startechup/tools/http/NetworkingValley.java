@@ -57,6 +57,10 @@ public class NetworkingValley {
 
     private HashMap<String, String> mBodyParams;
 
+    private String mKeyStorePassword = "";
+
+    private String mClientStorePassword = "";
+
     public static final int DEFAULT_TIMEOUT_MS = 30000;
 
     private NetworkingValley(Builder builder) {
@@ -66,6 +70,8 @@ public class NetworkingValley {
         mSSLHttpStack = builder.mSSLHttpStack;
         mHeaders = builder.mHeaders;
         mBodyParams = builder.mBodyParams;
+        mKeyStorePassword = builder.mKeyStorePassword;
+        mClientStorePassword = builder.mClientStorePassword;
     }
 
     public static class Builder {
@@ -83,6 +89,10 @@ public class NetworkingValley {
         private HashMap<String, String> mHeaders;
 
         private HashMap<String, String> mBodyParams;
+
+        private String mKeyStorePassword = "";
+
+        private String mClientStorePassword = "";
 
         public Builder(Context context) {
             if(mRequestQueue == null) {
@@ -132,6 +142,18 @@ public class NetworkingValley {
 
         public Builder loadBodyParams(HashMap<String, String> bodyParams) {
             mBodyParams = bodyParams;
+
+            return this;
+        }
+
+        public Builder setKeyStorePassword(String keyStorePassword) {
+            mKeyStorePassword = keyStorePassword;
+
+            return this;
+        }
+
+        public Builder setClientStorePassword(String clientStorePassword) {
+            mClientStorePassword = clientStorePassword;
 
             return this;
         }
