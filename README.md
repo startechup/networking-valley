@@ -17,7 +17,8 @@ compile 'com.squareup.okio:okio:1.6.0'
 ```
 
 ### Features
-You don't have to worry writing codes to implement the SSL/HTTPS feature, it is already handled in this library.
+You don't have to worry writing codes to implement the SSL/HTTPS feature, it is already handled in this library. We did the
+hard coding part for you. Also we made sure that there were no deprecated libraries used here.
 
 
 ### How we implemented it
@@ -41,6 +42,7 @@ public class CoolApplication extends Application {
         InputStream keyStore = getResources().openRawResource(R.raw.keystore);
 
         // Create the Networking Valley library and load the certification files.
+        // You can omit the loadCerts() method if you don't need SSL when communicating with the API.
         new NetworkingValley.Builder(this).loadCerts(clientStore, keyStore).build();
     }
 }
@@ -59,7 +61,7 @@ public class AboutActivity extends AppCompatActivity implements OnAPIListener {
         setContentView(R.layout.activity_about);
 
         // For example if calling a GET API request, just write it like this.
-        // Pass the url in the second parameter, and class implementing the listener in this case this Activity.
+        // Pass the url in the first parameter, and class implementing the listener in this case this Activity in the second one.
         JsonObjectRequest request = NetworkingValley.constructGetRequest("https://coolestapiever.com/api/stuffs", this);
         NetworkingValley.addRequestQueue(request);
     }
