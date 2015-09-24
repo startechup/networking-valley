@@ -50,8 +50,12 @@ public class SSLTrustManager implements X509TrustManager {
      */
     private ArrayList<X509TrustManager> mListTrustManager;
 
-    public SSLTrustManager(InputStream inputTrustKey) {
+    private String mClientStorePassword = "";
+
+    public SSLTrustManager(InputStream inputTrustKey, String clientKeyPassword) {
         mInputTrustKey = inputTrustKey;
+
+        mClientStorePassword = clientKeyPassword;
 
         mListTrustManager = new ArrayList<>();
 
@@ -70,7 +74,7 @@ public class SSLTrustManager implements X509TrustManager {
     private void loadTrustKeyStore() {
         try {
             mKeyStoreTrust = KeyStore.getInstance("BKS");
-            mKeyStoreTrust.load(mInputTrustKey, "".toCharArray());
+            mKeyStoreTrust.load(mInputTrustKey, mClientStorePassword.toCharArray());
 
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();

@@ -56,6 +56,10 @@ public class SSLHttpStack extends HurlStack {
      */
     private OkUrlFactory mOkUrlFactory;
 
+    private String mKeyStorePassword = "";
+
+    private String mClientStorePassword = "";
+
     public SSLHttpStack(InputStream inputClientKey, InputStream inputTrustKey) {
         mInputClientKey = inputClientKey;
         mInputTrustKey = inputTrustKey;
@@ -108,13 +112,13 @@ public class SSLHttpStack extends HurlStack {
 
         try {
             KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-            keyManagerFactory.init(keyStoreClient, "".toCharArray());
+            keyManagerFactory.init(keyStoreClient, mKeyStorePassword.toCharArray());
 
             // Get the key managers
             KeyManager[] keyManagers = keyManagerFactory.getKeyManagers();
 
             // Now, get the trust managers
-            TrustManager[] trustManagers = { new SSLTrustManager(mInputTrustKey) };
+            TrustManager[] trustManagers = { new SSLTrustManager(mInputTrustKey, mClientStorePassword) };
 
             // Create a SSL Context with the key managers and trust managers.
             mSSLContext = SSLContext.getInstance("TLS");
@@ -124,5 +128,13 @@ public class SSLHttpStack extends HurlStack {
         }
 
         return mSSLContext;
+    }
+
+    public void setKeyStorePassword(String keyStorePassword) {
+        mKeyStorePassword = keyStorePassword;
+    }
+
+    public void setClientStorePassword(String clientStorePassword) {
+        mClientStorePassword = clientStorePassword;
     }
 }
