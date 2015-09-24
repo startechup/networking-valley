@@ -48,6 +48,15 @@ public class CoolApplication extends Application {
 }
 ```
 
+Set the password you defined in each of your certificates, just call setClientStorePassword() and
+setKeyStorePassword() respectively.
+```
+new NetworkingValley.Builder(this).loadCerts(clientStore, keyStore)
+                .setClientStorePassword("Co0lP@ssword")
+                .setKeyStorePassword("Il1keYoP@ssword")
+                .build();
+```
+
 Then in our Activity we implemented `OnAPIListener` and in `onCreate()` method called the network request like
 
 ```
