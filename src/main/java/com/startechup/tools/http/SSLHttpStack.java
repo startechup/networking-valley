@@ -93,7 +93,7 @@ public class SSLHttpStack extends HurlStack {
 
         try {
             keyStoreClient = KeyStore.getInstance("BKS");
-            keyStoreClient.load(mInputClientKey, "".toCharArray());
+            keyStoreClient.load(mInputClientKey, mKeyStorePassword.toCharArray());
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
         }
