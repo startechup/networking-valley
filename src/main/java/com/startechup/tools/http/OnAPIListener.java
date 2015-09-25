@@ -32,6 +32,13 @@ public interface OnAPIListener {
     void onSuccess(JSONObject jsonResponse);
 
     /**
+     * Called when call to API is successful.
+     *
+     * @param successResponse Response from the API
+     */
+    void onSuccess(String successResponse);
+
+    /**
      * Callback when call to API failed.
      */
     void onFail(String response);

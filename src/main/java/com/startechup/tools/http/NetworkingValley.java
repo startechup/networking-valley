@@ -18,14 +18,24 @@
 package com.startechup.tools.http;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
-import com.android.volley.*;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.startechup.tools.http.custom.ImageUploadRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -465,6 +475,44 @@ public class NetworkingValley {
                 return bodyArg;
             }
         };
+
+        request.setRetryPolicy(getHttpRetryPolicy());
+
+        return request;
+    }
+
+    public static ImageUploadRequest constructImageUploadRequest(String url, Bitmap bitmap, final OnAPIListener apiListener) {
+        ImageUploadRequest request = new ImageUploadRequest(url, bitmap, new Response.Listener() {
+
+            @Override
+            public void onResponse(Object response) {
+                apiListener.onSuccess(response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                apiListener.onFail(error.getMessage());
+            }
+        });
+
+        request.setRetryPolicy(getHttpRetryPolicy());
+
+        return request;
+    }
+
+    public static ImageUploadRequest constructImageUploadRequest(String url, File fileImage, final OnAPIListener apiListener) {
+        ImageUploadRequest request = new ImageUploadRequest(url, fileImage, new Response.Listener() {
+
+            @Override
+            public void onResponse(Object response) {
+                apiListener.onSuccess(response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                apiListener.onFail(error.getMessage());
+            }
+        });
 
         request.setRetryPolicy(getHttpRetryPolicy());
 
