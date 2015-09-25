@@ -27,23 +27,3 @@ dependencies {
     compile 'com.squareup.okio:okio:1.6.0'
 }
 
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'networking-valley'
-
-    publishedGroupId = 'com.startechup.tools'
-    libraryName = 'NetworkingValley'
-
-    artifact = 'networkingvalley'
-
-    libraryDescription = 'A networking library for Android built using a combination of both Volley and OkHttp.\n' +
-            'You can use this on both HTTP and HTTPS request.'
-    libraryVersion = '1.0.4'
-
-    developerId = 'lawgimenez'
-    developerName = 'Lawrence Gimenez'
-    developerEmail = 'lgimenez@startechup.com'
-}
-
-apply from: 'https://raw.githubusercontent.com/attwellBrian/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/attwellBrian/JCenter/master/bintrayv1.gradle'
