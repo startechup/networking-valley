@@ -20,6 +20,9 @@ compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
 compile 'com.squareup.okio:okio:1.6.0'
 ```
 
+Note: In the new build 1.0.5, we included in this library the Apache's httpcore and httpmime jar files essential to construct the
+multipart/form-data enctype for uploading images.
+
 ### Features
 You don't have to worry writing codes to implement the SSL/HTTPS feature, it is already handled in this library. We did the
 hard coding part for you. Also we made sure that there were no deprecated libraries used here.
