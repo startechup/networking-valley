@@ -4,6 +4,10 @@ A networking library for Android built using a combination of both [Volley](http
 You can use this on both HTTP and HTTPS request. We use this library on both implementing SSL on debugging mode (also using self-signed certificates) and when the API
 server requires a [Mutual-SSL authentication](http://www.codeproject.com/Articles/326574/An-Introduction-to-Mutual-SSL-Authentication).
 
+### Change logs
+1.0.5
+- Can now upload images using the `NetworkingValley.constructImageUploadRequest()` method. This implementation on uploading images is a multipart/form-data enctype.
+
 ### Dependencies
 Before using the library make sure you have the two libraries added to your project.
 On how, go to [Volley](https://developer.android.com/training/volley/index.html) and [OkHttp](http://square.github.io/okhttp/) respectively.
@@ -25,6 +29,13 @@ hard coding part for you. Also we made sure that there were no deprecated librar
 Add Networking-Valley to your dependencies on `build.gradle`:
 
 `compile 'com.startechup.tools:networkingvalley:1.0.5'`
+
+or you can clone this repo and import it directly to your current Android project. On Android Studio, go to File > New > Import Module
+and in the popup locate the cloned directory and click finish.
+
+If you encountered problems building after importing this module, or Networking Valley's class are not imported, add the following line to your `build.gradle` file:
+
+`compile project(':networking-valley')`
 
 First, we converted the files into [BKS](https://www.bouncycastle.org/specifications.html) format and uploaded it to the project's
 /raw folder. Then in our global Application class, we added the "builder" implementation.
