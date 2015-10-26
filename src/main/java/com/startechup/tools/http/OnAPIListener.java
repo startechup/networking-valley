@@ -34,6 +34,13 @@ public interface OnAPIListener {
     /**
      * Called when call to API is successful.
      *
+     * @param jsonArrayResponse Response from the API
+     */
+    void onSuccess(JSONArray jsonArrayResponse);
+
+    /**
+     * Called when call to API is successful.
+     *
      * @param successResponse Response from the API
      */
     void onSuccess(String successResponse);

@@ -246,6 +246,29 @@ public class NetworkingValley {
     }
 
     /**
+     * Constructs a GET network request that returns JSON array as a response.
+     *
+     * @param url URL of the API
+     * @param apiListener Listener whether network request is successful or not
+     * @return JSON array response from the API
+     */
+    public static JsonArrayRequest constructGetJsonArrayRequest(String url, final OnAPIListener apiListener) {
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
+                getJsonArrayResponseListener(apiListener), getErrorListener(apiListener))
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Log.i(TAG, "Headers: " + getHeaderParams().toString());
+                return getHeaderParams();
+            }
+        };
+
+        request.setRetryPolicy(getHttpRetryPolicy());
+
+        return request;
+    }
+
+    /**
      * Constructs a POST network request that returns a String format response.
      *
      * @param url URL of the API
