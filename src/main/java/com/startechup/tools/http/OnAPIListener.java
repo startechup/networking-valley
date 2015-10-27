@@ -17,6 +17,7 @@
 
 package com.startechup.tools.http;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -30,6 +31,13 @@ public interface OnAPIListener {
      * @param jsonResponse API response in JSON object format
      */
     void onSuccess(JSONObject jsonResponse);
+
+    /**
+     * Called when call to API is successful.
+     *
+     * @param jsonArrayResponse Response from the API
+     */
+    void onSuccess(JSONArray jsonArrayResponse);
 
     /**
      * Called when call to API is successful.
