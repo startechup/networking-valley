@@ -75,7 +75,7 @@ public class NetworkingValley {
 
     public static final int DEFAULT_TIMEOUT_MS = 30000;
 
-    public NetworkingValley(Builder builder) {
+    private NetworkingValley(Builder builder) {
         mAccessToken = builder.mAccessToken;
         mBaseUrl = builder.mBaseUrl;
         mRequestQueue = builder.mRequestQueue;
