@@ -271,11 +271,11 @@ public class NetworkingValley {
     }
 
     /**
-     * Constructs a GET network request that returns JSON object as a response.
+     * Constructs a GET network request that returns String object as a response.
      *
      * @param url URL of the API
      * @param apiListener Listener whether network request is successful or not.
-     * @return JSON object response from the API
+     * @return String object response from the API
      */
     public static StringRequest constructStringGetRequest(String url, final OnAPIListener apiListener) {
         StringRequest request = new StringRequest(Request.Method.GET, url,

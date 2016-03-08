@@ -17,9 +17,6 @@
 
 package com.startechup.tools.http;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 /**
  * Listener for network request if successful or failed.
  */
@@ -28,23 +25,9 @@ public interface OnAPIListener {
     /**
      * Callback when call to API is successful.
      *
-     * @param jsonResponse API response in JSON object format
+     * @param response API response.
      */
-    void onSuccess(JSONObject jsonResponse);
-
-    /**
-     * Called when call to API is successful.
-     *
-     * @param jsonArrayResponse Response from the API
-     */
-    void onSuccess(JSONArray jsonArrayResponse);
-
-    /**
-     * Called when call to API is successful.
-     *
-     * @param successResponse Response from the API
-     */
-    void onSuccess(String successResponse);
+    void onSuccess(Object response);
 
     /**
      * Callback when call to API failed.
