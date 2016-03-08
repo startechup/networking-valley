@@ -271,6 +271,29 @@ public class NetworkingValley {
     }
 
     /**
+     * Constructs a GET network request that returns JSON object as a response.
+     *
+     * @param url URL of the API
+     * @param apiListener Listener whether network request is successful or not.
+     * @return JSON object response from the API
+     */
+    public static StringRequest constructStringGetRequest(String url, final OnAPIListener apiListener) {
+        StringRequest request = new StringRequest(Request.Method.GET, url,
+                getStringResponseListener(apiListener), getErrorListener(apiListener)
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Log.i(TAG, "Headers: " + getHeaderParams().toString());
+                return getHeaderParams();
+            }
+        };
+
+        request.setRetryPolicy(getHttpRetryPolicy());
+
+        return request;
+    }
+
+    /**
      * Constructs a POST network request that returns a String format response.
      *
      * @param url URL of the API
@@ -587,12 +610,7 @@ public class NetworkingValley {
 
             @Override
             public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    apiListener.onSuccess(jsonResponse);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                apiListener.onSuccess(response);
             }
         };
     }
