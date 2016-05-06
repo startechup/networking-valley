@@ -97,8 +97,9 @@ public class AboutActivity extends AppCompatActivity implements OnAPIListener {
 
         // For example if calling a GET API request, just write it like this.
         // Pass the url in the first parameter, and class implementing the listener in this case this Activity in the second one.
-        JsonObjectRequest request = NetworkingValley.constructGetRequest("https://coolestapiever.com/api/stuffs", this);
-        NetworkingValley.addRequestQueue(request);
+        String url = "https://api.ipify.org/?format=json";
+        StringRequest stringRequest = NetworkingValley.constructGetRequest(url, this);
+        NetworkingValley.addRequestQueue(stringRequest);
     }
 
     @Override
