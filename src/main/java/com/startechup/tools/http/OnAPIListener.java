@@ -30,7 +30,8 @@ public interface OnAPIListener {
     void onSuccess(String response);
 
     /**
-     * Callback when call to API failed.
+     * Callback when call to API is a failure.
+     * @param response API response
      */
     void onFail(String response);
 }
