@@ -31,9 +31,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.startechup.tools.http.custom.ImageUploadRequest;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -455,12 +452,7 @@ public class NetworkingValley {
                 url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    apiListener.onSuccess(jsonResponse);
-                } catch (JSONException je) {
-                    je.printStackTrace();
-                }
+                apiListener.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -535,21 +527,6 @@ public class NetworkingValley {
         request.setRetryPolicy(getHttpRetryPolicy());
 
         return request;
-    }
-
-    /**
-     * Returns a successful network response listener from the API. Listener returns a JSON object.
-     *
-     * @param apiListener Listener to indicate that network request is successful.
-     * @return Listener for network response
-     */
-    private static Response.Listener<JSONObject> getJsonResponseListener(final OnAPIListener apiListener) {
-        return new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                apiListener.onSuccess(response);
-            }
-        };
     }
 
     /**

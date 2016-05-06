@@ -27,7 +27,7 @@ public interface OnAPIListener {
      *
      * @param response API response.
      */
-    void onSuccess(Object response);
+    void onSuccess(String response);
 
     /**
      * Callback when call to API failed.
