@@ -8,8 +8,6 @@ server requires a [Mutual-SSL authentication](http://www.codeproject.com/Article
 2.0
 - Updated library to be compatible with new Android Studio / Gradle versions
 - Removed deprecated methods
-1.0.5
-- Can now upload images using the `NetworkingValley.constructImageUploadRequest()` method. This implementation on uploading images is a multipart/form-data enctype.
 
 ### Dependencies
 Before using the library make sure you have the two libraries added to your project.
@@ -17,13 +15,13 @@ On how, go to [Volley](https://developer.android.com/training/volley/index.html)
 Or you can directly add the below lines to your project's `build.gradle` file.
 
 ```
-compile 'com.mcxiaoke.volley:library:1.0.19'
-compile 'com.squareup.okhttp:okhttp:2.5.0'
-compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
-compile 'com.squareup.okio:okio:1.6.0'
+compile 'com.android.volley:volley:1.0.0'
+compile 'com.squareup.okhttp3:okhttp:3.2.0'
+compile 'com.squareup.okhttp:okhttp-urlconnection:2.7.5'
+compile 'com.squareup.okio:okio:1.7.0'
 ```
 
-Note: In the new build 1.0.5, we included in this library the Apache's httpcore and httpmime jar files essential to construct the
+Note: Starting from build 1.0.5, we included in this library the Apache's httpcore and httpmime jar files essential to construct the
 multipart/form-data enctype for uploading images.
 
 ### Features
@@ -51,8 +49,6 @@ dependencies {
     compile 'com.github.startechup:networking-valley:2.0'
 }
 ```
-
-`compile 'com.startechup.tools:networkingvalley:1.0.5'`
 
 or you can clone this repo and import it directly to your current Android project. On Android Studio, go to File > New > Import Module
 and in the popup locate the cloned directory and click finish.
