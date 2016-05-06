@@ -31,7 +31,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.startechup.tools.http.custom.ImageUploadRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -548,21 +547,6 @@ public class NetworkingValley {
         return new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                apiListener.onSuccess(response);
-            }
-        };
-    }
-
-    /**
-     * Returns a successful network response listener from the API. Listener returns a JSON array.
-     *
-     * @param apiListener Listener to indicate that network request is successful.
-     * @return Listener for network response
-     */
-    private static Response.Listener<JSONArray> getJsonArrayResponseListener(final OnAPIListener apiListener) {
-        return new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
                 apiListener.onSuccess(response);
             }
         };
