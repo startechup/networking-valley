@@ -5,6 +5,9 @@ You can use this on both HTTP and HTTPS request. We use this library on both imp
 server requires a [Mutual-SSL authentication](http://www.codeproject.com/Articles/326574/An-Introduction-to-Mutual-SSL-Authentication).
 
 ### Change logs
+2.0
+- Updated library to be compatible with new Android Studio / Gradle versions
+- Removed deprecated methods
 1.0.5
 - Can now upload images using the `NetworkingValley.constructImageUploadRequest()` method. This implementation on uploading images is a multipart/form-data enctype.
 
@@ -30,6 +33,24 @@ hard coding part for you. Also we made sure that there were no deprecated librar
 
 ### How we implemented it
 Add Networking-Valley to your dependencies on `build.gradle`:
+
+In your build.gradle (root), add
+```
+allprojects {
+    repositories {
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+}
+```
+
+and add the library in the dependencies in the build.gradle (app) like
+```
+dependencies {
+    compile 'com.github.startechup:networking-valley:2.0'
+}
+```
 
 `compile 'com.startechup.tools:networkingvalley:1.0.5'`
 
