@@ -27,8 +27,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.startechup.tools.http.custom.ImageUploadRequest;
@@ -59,20 +57,44 @@ public class NetworkingValley {
      */
     public static String mAccessToken = "";
 
+    /**
+     * Base URL for API endpoint
+     */
     private String mBaseUrl;
 
+    /**
+     * Volley's request queue
+     */
     private static RequestQueue mRequestQueue;
 
+    /**
+     * Initialized when secure http request
+     */
     private SSLHttpStack mSSLHttpStack;
 
+    /**
+     * Parameters for http header
+     */
     private HashMap<String, String> mHeaders;
 
+    /**
+     * Parameters for http
+     */
     private HashMap<String, String> mBodyParams;
 
+    /**
+     * Keystore password
+     */
     private String mKeyStorePassword = "";
 
+    /**
+     * Client store password
+     */
     private String mClientStorePassword = "";
 
+    /**
+     * Default timeout at 30 seconds
+     */
     public static final int DEFAULT_TIMEOUT_MS = 30000;
 
     private NetworkingValley(Builder builder) {
@@ -89,21 +111,13 @@ public class NetworkingValley {
     public static class Builder {
 
         private Context mContext;
-
         private String mAccessToken = "";
-
         private String mBaseUrl;
-
         private RequestQueue mRequestQueue;
-
         private SSLHttpStack mSSLHttpStack;
-
         private HashMap<String, String> mHeaders;
-
         private HashMap<String, String> mBodyParams;
-
         private String mKeyStorePassword = "";
-
         private String mClientStorePassword = "";
 
         public Builder(Context context) {
@@ -134,7 +148,6 @@ public class NetworkingValley {
 
         public Builder loadCerts(InputStream inputClientStore, InputStream inputKeyStore) {
             mSSLHttpStack = new SSLHttpStack(inputClientStore, inputKeyStore);
-
             mRequestQueue = Volley.newRequestQueue(mContext, mSSLHttpStack);
 
             return this;
@@ -200,86 +213,19 @@ public class NetworkingValley {
     }
 
     /**
-     * Constructs a GET network request that returns JSON object as a response.
-     *
-     * @param url URL of the API
-     * @param apiListener Listener whether network request is successful or not.
-     * @return JSON object response from the API
-     */
-    public static JsonObjectRequest constructGetRequest(String url, final OnAPIListener apiListener) {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,
-                getJsonResponseListener(apiListener), getErrorListener(apiListener)
-        ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + getHeaderParams().toString());
-                return getHeaderParams();
-            }
-        };
-
-        request.setRetryPolicy(getHttpRetryPolicy());
-
-        return request;
-    }
-
-    /**
-     * Constructs a GET network request that returns JSON object as a response. With this method you can specify
-     * your own header parameters.
-     *
-     * @param url URL of the API
-     * @param headers Header parameters to be included in the network request
-     * @param apiListener Listener whether network request is successful or not
-     * @return JSON object response from the API
-     */
-    public static JsonObjectRequest constructGetRequest(String url, final HashMap<String, String> headers, final OnAPIListener apiListener) {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,
-                getJsonResponseListener(apiListener), getErrorListener(apiListener)
-        ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + headers);
-                return headers;
-            }
-        };
-
-        request.setRetryPolicy(getHttpRetryPolicy());
-
-        return request;
-    }
-
-    /**
-     * Constructs a GET network request that returns JSON array as a response.
-     *
-     * @param url URL of the API
-     * @param apiListener Listener whether network request is successful or not
-     * @return JSON array response from the API
-     */
-    public static JsonArrayRequest constructGetJsonArrayRequest(String url, final OnAPIListener apiListener) {
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
-                getJsonArrayResponseListener(apiListener), getErrorListener(apiListener))
-        {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + getHeaderParams().toString());
-                return getHeaderParams();
-            }
-        };
-
-        request.setRetryPolicy(getHttpRetryPolicy());
-
-        return request;
-    }
-
-    /**
      * Constructs a GET network request that returns String object as a response.
      *
      * @param url URL of the API
      * @param apiListener Listener whether network request is successful or not.
      * @return String object response from the API
      */
-    public static StringRequest constructStringGetRequest(String url, final OnAPIListener apiListener) {
-        StringRequest request = new StringRequest(Request.Method.GET, url,
-                getStringResponseListener(apiListener), getErrorListener(apiListener)
+    public static StringRequest constructGetRequest(String url,
+                                                    final OnAPIListener apiListener) {
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url,
+                getStringResponseListener(apiListener),
+                getErrorListener(apiListener)
         ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -302,13 +248,13 @@ public class NetworkingValley {
      * @return String response from the API
      */
     public static StringRequest constructPostRequest(String url,
-                                                      final HashMap<String, String> bodyArg,
-                                                      final OnAPIListener apiListener) {
-        StringRequest request = new StringRequest(Request.Method.POST,
+                                                     final HashMap<String, String> bodyArg,
+                                                     final OnAPIListener apiListener) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
                 url,
                 getStringResponseListener(apiListener),
                 getErrorListener(apiListener)) {
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Log.i(TAG, "Headers: " + getHeaderParams().toString());
@@ -342,11 +288,11 @@ public class NetworkingValley {
                                                      final HashMap<String, String> headers,
                                                      final HashMap<String, String> bodyArg,
                                                      final OnAPIListener apiListener) {
-        StringRequest request = new StringRequest(Request.Method.POST,
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
                 url,
                 getStringResponseListener(apiListener),
                 getErrorListener(apiListener)) {
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Log.i(TAG, "Headers: " + headers);
@@ -377,7 +323,11 @@ public class NetworkingValley {
     public static StringRequest constructPutRequest(String url,
                                                      final Map<String, String> bodyArg,
                                                      final OnAPIListener apiListener) {
-        StringRequest request = new StringRequest(Request.Method.PUT, url, getStringResponseListener(apiListener), getErrorListener(apiListener)
+        StringRequest request = new StringRequest(
+                Request.Method.PUT,
+                url,
+                getStringResponseListener(apiListener),
+                getErrorListener(apiListener)
         ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -411,7 +361,11 @@ public class NetworkingValley {
                                                     final HashMap<String, String> headers,
                                                     final Map<String, String> bodyArg,
                                                     final OnAPIListener apiListener) {
-        StringRequest request = new StringRequest(Request.Method.PUT, url, getStringResponseListener(apiListener), getErrorListener(apiListener)
+        StringRequest request = new StringRequest(
+                Request.Method.PUT,
+                url,
+                getStringResponseListener(apiListener),
+                getErrorListener(apiListener)
         ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -439,8 +393,12 @@ public class NetworkingValley {
      * @return String response from the API
      */
     public static StringRequest constructDeleteRequest(String url,
-                                                        final OnAPIListener apiListener) {
-        StringRequest request = new StringRequest(Request.Method.DELETE, url, getStringResponseListener(apiListener), getErrorListener(apiListener)){
+                                                       final OnAPIListener apiListener) {
+        StringRequest request = new StringRequest(
+                Request.Method.DELETE,
+                url,
+                getStringResponseListener(apiListener),
+                getErrorListener(apiListener)){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Log.i(TAG, "Headers: " + getHeaderParams().toString());
@@ -465,7 +423,11 @@ public class NetworkingValley {
     public static StringRequest constructDeleteRequest(String url,
                                                        final HashMap<String, String> headers,
                                                        final OnAPIListener apiListener) {
-        StringRequest request = new StringRequest(Request.Method.DELETE, url, getStringResponseListener(apiListener), getErrorListener(apiListener)){
+        StringRequest request = new StringRequest(
+                Request.Method.DELETE,
+                url,
+                getStringResponseListener(apiListener),
+                getErrorListener(apiListener)){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Log.i(TAG, "Headers: " + headers);
@@ -486,9 +448,12 @@ public class NetworkingValley {
      * @param apiListener Listener whether network request is successful or not
      * @return String response from the API
      */
-    public static StringRequest constructAuthRequest(String url, final Map<String, String> bodyArg, final OnAPIListener apiListener) {
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-
+    public static StringRequest constructAuthRequest(String url,
+                                                     final Map<String, String> bodyArg,
+                                                     final OnAPIListener apiListener) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -497,15 +462,13 @@ public class NetworkingValley {
                 } catch (JSONException je) {
                     je.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiListener.onFail(error.getClass().getSimpleName());
             }
-        }) {
-
+        }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String,String> headers = new HashMap<>();
@@ -529,9 +492,13 @@ public class NetworkingValley {
         return request;
     }
 
-    public static ImageUploadRequest constructImageUploadRequest(String url, Bitmap bitmap, final OnAPIListener apiListener) {
-        ImageUploadRequest request = new ImageUploadRequest(url, bitmap, new Response.Listener() {
-
+    public static ImageUploadRequest constructImageUploadRequest(String url,
+                                                                 Bitmap bitmap,
+                                                                 final OnAPIListener apiListener) {
+        ImageUploadRequest request = new ImageUploadRequest(
+                url,
+                bitmap,
+                new Response.Listener() {
             @Override
             public void onResponse(Object response) {
                 apiListener.onSuccess(response.toString());
@@ -548,9 +515,13 @@ public class NetworkingValley {
         return request;
     }
 
-    public static ImageUploadRequest constructImageUploadRequest(String url, File fileImage, final OnAPIListener apiListener) {
-        ImageUploadRequest request = new ImageUploadRequest(url, fileImage, new Response.Listener() {
-
+    public static ImageUploadRequest constructImageUploadRequest(String url,
+                                                                 File fileImage,
+                                                                 final OnAPIListener apiListener) {
+        ImageUploadRequest request = new ImageUploadRequest(
+                url,
+                fileImage,
+                new Response.Listener() {
             @Override
             public void onResponse(Object response) {
                 apiListener.onSuccess(response.toString());
@@ -575,7 +546,6 @@ public class NetworkingValley {
      */
     private static Response.Listener<JSONObject> getJsonResponseListener(final OnAPIListener apiListener) {
         return new Response.Listener<JSONObject>() {
-
             @Override
             public void onResponse(JSONObject response) {
                 apiListener.onSuccess(response);
@@ -591,7 +561,6 @@ public class NetworkingValley {
      */
     private static Response.Listener<JSONArray> getJsonArrayResponseListener(final OnAPIListener apiListener) {
         return new Response.Listener<JSONArray>() {
-
             @Override
             public void onResponse(JSONArray response) {
                 apiListener.onSuccess(response);
@@ -607,7 +576,6 @@ public class NetworkingValley {
      */
     private static Response.Listener<String> getStringResponseListener(final OnAPIListener apiListener) {
         return new Response.Listener<String>() {
-
             @Override
             public void onResponse(String response) {
                 apiListener.onSuccess(response);
@@ -623,7 +591,6 @@ public class NetworkingValley {
      */
     private static Response.ErrorListener getErrorListener(final OnAPIListener apiListener) {
         return new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
                 apiListener.onFail(error.getClass().getSimpleName());
@@ -637,7 +604,9 @@ public class NetworkingValley {
      * @return Updated timeout policy
      */
     private static DefaultRetryPolicy getHttpRetryPolicy() {
-        return new DefaultRetryPolicy(DEFAULT_TIMEOUT_MS, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        return new DefaultRetryPolicy(DEFAULT_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
     }
 
     /**
