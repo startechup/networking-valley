@@ -46,7 +46,7 @@ allprojects {
 and add the library in the dependencies in the build.gradle (app) like
 ```
 dependencies {
-    compile 'com.github.startechup:networking-valley:2.0'
+    compile 'com.github.startechup:networking-valley:2.0.1'
 }
 ```
 
