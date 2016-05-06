@@ -253,14 +253,14 @@ public class NetworkingValley {
                 getErrorListener(apiListener)) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + getHeaderParams().toString());
+                Log.d(TAG, "Headers: " + getHeaderParams().toString());
 
                 return getHeaderParams();
             }
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Log.i(TAG, "Params: " + bodyArg.toString());
+                Log.d(TAG, "Params: " + bodyArg.toString());
                 return bodyArg;
             }
         };
@@ -291,14 +291,14 @@ public class NetworkingValley {
                 getErrorListener(apiListener)) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + headers);
+                Log.d(TAG, "Headers: " + headers);
 
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Log.i(TAG, "Params: " + bodyArg.toString());
+                Log.d(TAG, "Params: " + bodyArg.toString());
                 return bodyArg;
             }
         };
@@ -327,13 +327,13 @@ public class NetworkingValley {
         ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + getHeaderParams().toString());
+                Log.d(TAG, "Headers: " + getHeaderParams().toString());
                 return getHeaderParams();
             }
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Log.i(TAG, "Params: " + bodyArg.toString());
+                Log.d(TAG, "Params: " + bodyArg.toString());
                 return bodyArg;
             }
         };
@@ -365,13 +365,13 @@ public class NetworkingValley {
         ){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + headers);
+                Log.d(TAG, "Headers: " + headers);
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Log.i(TAG, "Params: " + bodyArg.toString());
+                Log.d(TAG, "Params: " + bodyArg.toString());
                 return bodyArg;
             }
         };
@@ -397,7 +397,7 @@ public class NetworkingValley {
                 getErrorListener(apiListener)){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + getHeaderParams().toString());
+                Log.d(TAG, "Headers: " + getHeaderParams().toString());
                 return getHeaderParams();
             }
         };
@@ -426,7 +426,7 @@ public class NetworkingValley {
                 getErrorListener(apiListener)){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Log.i(TAG, "Headers: " + headers);
+                Log.d(TAG, "Headers: " + headers);
                 return headers;
             }
         };
@@ -466,14 +466,14 @@ public class NetworkingValley {
                 headers.put("Accept","application/json");
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
 
-                Log.i(TAG, "Headers: " + headers.toString());
+                Log.d(TAG, "Headers: " + headers.toString());
 
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() {
-                Log.i(TAG, "Params: " + bodyArg.toString());
+                Log.d(TAG, "Params: " + bodyArg.toString());
                 return bodyArg;
             }
         };
