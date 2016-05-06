@@ -4,11 +4,6 @@ A networking library for Android built using a combination of both [Volley](http
 You can use this on both HTTP and HTTPS request. We use this library on both implementing SSL on debugging mode (also using self-signed certificates) and when the API
 server requires a [Mutual-SSL authentication](http://www.codeproject.com/Articles/326574/An-Introduction-to-Mutual-SSL-Authentication).
 
-### Change logs
-2.0
-- Updated library to be compatible with new Android Studio / Gradle versions
-- Removed deprecated methods
-
 ### Dependencies
 Before using the library make sure you have the two libraries added to your project.
 On how, go to [Volley](https://developer.android.com/training/volley/index.html) and [OkHttp](http://square.github.io/okhttp/) respectively.
