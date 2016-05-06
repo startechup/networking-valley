@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
+group = "com.github.lawgimenez"
+
 buildscript {
     repositories {
         mavenCentral()
@@ -51,7 +53,6 @@ dependencies {
 allprojects {
     repositories {
         mavenCentral()
-        mavenLocal()
         jcenter()
     }
 }
